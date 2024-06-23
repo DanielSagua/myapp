@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agregar Abono para <%= user.name %></title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-5">Agregar Abono para <%= user.name %></h1>
+        <form action="/payments/add" method="POST">
+            <div class="form-group">
+                <label for="monto">Monto:</label>
+                <input type="text" class="form-control" id="monto" name="monto" required>
+                <input type="hidden" name="user_id" value="<%= user.id %>">
+            </div>
+            <button type="submit" class="btn btn-primary">Agregar Abono</button>
+            <a href="/users/list" class="btn btn-secondary">Volver</a>
+
+        </form>
+    </div>
+</body>
+</html>

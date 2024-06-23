@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalles de Usuario</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-5">Detalles de Usuario - <%= user.name %></h1>
+        <p><strong>Nombre:</strong> <%= user.name %></p>
+        <p><strong>Detalle:</strong> <%= user.detalle %></p>
+        <p><strong>Monto:</strong> <%= parseFloat(user.monto).toFixed(0) %></p>
+        <p><strong>Monto Cuota:</strong> <%= parseFloat(montoFinal / user.cuotas).toFixed(0) %></p>
+        <p><strong>Monto Final:</strong> <%= parseFloat(montoFinal).toFixed(0) %></p>
+        <p><strong>Fecha de Inicio:</strong> <%= user.fecha_inicio ? user.fecha_inicio.toISOString().split('T')[0] : '' %></p>
+        <p><strong>Cuotas:</strong> <%= user.cuotas %></p>
+        <p><strong>Interés (%):</strong> <%= user.interes %></p>
+
+        <h2 class="mt-5">Pagos Realizados</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Monto Pagado</th>
+                    <th scope="col">Fecha de Pago</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% payments.forEach(payment => { %>
+                    <tr>
+                        <td><%= payment.id %></td>
+                        <td><%= parseFloat(payment.monto).toFixed(0) %></td>
+                        <td><%= payment.payment_date ? payment.payment_date.toISOString().split('T')[0] : '' %></td>
+                    </tr>
+                <% }); %>
+            </tbody>
+        </table>
+        
+        <h2 class="mt-5">Resumen de Pagos</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Total Abonado</th>
+                    <th scope="col">Pendiente</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><%= parseFloat(totalPagado).toFixed(0) %></td>
+                    <td><%= parseFloat(montoPendiente).toFixed(0) %></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <a href="/users/list" class="btn btn-secondary">Volver</a>
+    </div>
+</body>
+</html>
